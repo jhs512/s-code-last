@@ -3,7 +3,9 @@ package com.ll.scode.domain.memberModule.member.controller;
 import com.ll.scode.domain.memberModule.member.dto.MemberDto;
 import com.ll.scode.global.rsData.RsData.RsData;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +29,34 @@ public class ApiV1MembersController {
                 "200",
                 new MeResponse(
                         new MemberDto(1L, LocalDateTime.now(), LocalDateTime.now(), "user1")
+                )
+        );
+    }
+
+    @Setter
+    @Getter
+    public static class JoinRequest {
+        private String username;
+        private String password;
+        private String email;
+        private String nickname;
+    }
+
+    @Getter
+    public static class JoinResponse {
+        public MemberDto item;
+
+        public JoinResponse(MemberDto item) {
+            this.item = item;
+        }
+    }
+
+    @PostMapping("")
+    public RsData<MeResponse> join(JoinRequest joinRequest) {
+        return RsData.of(
+                "201",
+                new MeResponse(
+                        new MemberDto(1L, LocalDateTime.now(), LocalDateTime.now(), joinRequest.nickname)
                 )
         );
     }
