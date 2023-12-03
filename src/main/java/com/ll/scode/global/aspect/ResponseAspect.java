@@ -14,7 +14,22 @@ import org.springframework.stereotype.Component;
 public class ResponseAspect {
     private final Rq rq;
 
-    @Around("(@annotation(org.springframework.web.bind.annotation.GetMapping) || @annotation(org.springframework.web.bind.annotation.PostMapping) || @annotation(org.springframework.web.bind.annotation.PutMapping) || @annotation(org.springframework.web.bind.annotation.DeleteMapping)))")
+    @Around("""
+            within
+            (
+                @org.springframework.web.bind.annotation.RestController *
+            )
+            &&
+            (
+                @annotation(org.springframework.web.bind.annotation.GetMapping)
+                ||
+                @annotation(org.springframework.web.bind.annotation.PostMapping)
+                ||
+                @annotation(org.springframework.web.bind.annotation.PutMapping)
+                ||
+                @annotation(org.springframework.web.bind.annotation.DeleteMapping)
+            )
+            """)
     public Object handleResponse(ProceedingJoinPoint joinPoint) throws Throwable {
         Object proceed = joinPoint.proceed();
 

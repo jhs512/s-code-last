@@ -4,10 +4,8 @@ import com.ll.scode.domain.memberModule.member.dto.MemberDto;
 import com.ll.scode.global.rsData.RsData.RsData;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.ToString;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +33,7 @@ public class ApiV1MembersController {
 
     @Setter
     @Getter
+    @ToString
     public static class JoinRequest {
         private String username;
         private String password;
@@ -52,7 +51,9 @@ public class ApiV1MembersController {
     }
 
     @PostMapping("")
-    public RsData<MeResponse> join(JoinRequest joinRequest) {
+    public RsData<MeResponse> join(
+            @RequestBody JoinRequest joinRequest
+    ) {
         return RsData.of(
                 "201",
                 new MeResponse(
