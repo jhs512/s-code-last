@@ -1,6 +1,7 @@
 package com.ll.scode.domain.memberModule.member.controller;
 
 import com.ll.scode.domain.memberModule.member.dto.MemberDto;
+import com.ll.scode.global.rsData.RsData.RsData;
 import lombok.Getter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +22,11 @@ public class ApiV1MembersController {
     }
 
     @GetMapping("/me")
-    public MeResponse me() {
-        return new MeResponse(
-                new MemberDto(
-                        1L,
-                        LocalDateTime.now(),
-                        LocalDateTime.now(),
-                        "user1"
+    public RsData<MeResponse> me() {
+        return RsData.of(
+                "200",
+                new MeResponse(
+                        new MemberDto(1L, LocalDateTime.now(), LocalDateTime.now(), "user1")
                 )
         );
     }

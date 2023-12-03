@@ -37,9 +37,9 @@ public class ApiV1MembersControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(handler().handlerType(ApiV1MembersController.class))
                 .andExpect(handler().methodName("me"))
-                .andExpect(jsonPath("$.item.id", is(1)))
-                .andExpect(jsonPath("$.item.createDate", matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{7}")))
-                .andExpect(jsonPath("$.item.modifyDate", matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{7}")))
-                .andExpect(jsonPath("$.item.name", is("user1")));
+                .andExpect(jsonPath("$.data.item.id", is(1)))
+                .andExpect(jsonPath("$.data.item.createDate", matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{7}")))
+                .andExpect(jsonPath("$.data.item.modifyDate", matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{7}")))
+                .andExpect(jsonPath("$.data.item.name", is("user1")));
     }
 }
